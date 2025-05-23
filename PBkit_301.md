@@ -146,7 +146,8 @@ echo out  | sudo tee /sys/class/gpio/gpio79/direction
 #!/bin/bash
 PIN=79
 # Инверсия логики: 0=вкл, 1=выкл — уточните по вашей плате
-while true; do
+while true;
+ do
   echo 0 | sudo tee /sys/class/gpio/gpio${PIN}/value  # включить светодиод
   sleep 0.5
   echo 1 | sudo tee /sys/class/gpio/gpio${PIN}/value  # выключить
