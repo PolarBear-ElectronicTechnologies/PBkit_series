@@ -1,7 +1,4 @@
 # PBkit301-A and PBkit301-A-BASE
-
-![PBkit301-A](PBkit301-A )
-
 ![PBkit301-A](images/pbkit_3-1_A_BASE.jpg )
 
 ## Содержание
@@ -27,6 +24,7 @@
 PBkit301-A – это система-на-модуле (SoM) на базе Rockchip RK3568, 64-битного четырёхъядерного процессора Cortex-A55 с интегрированным NPU (1 TOPS) и частотой до 2 ГГц.  
 Она обеспечивает высокую производительность при низком энергопотреблении и прошла обширные стресс- и температурные тесты на надёжность :contentReference[oaicite:1]{index=1}.
 
+![PBkit301-A](images/pbkit_301_A.jpg)
 ---
 
 ## Основные характеристики
@@ -58,59 +56,58 @@ PBkit301-A – это система-на-модуле (SoM) на базе Rockc
 | eDP 1.3    | до 2560×1600 @ 60 Гц                         |
 | MIPI-DSI   | 1-лан. до 1920×1080 @ 60 Гц; 2-лан. до 2560×1440 @ 60 Гц |
 | LVDS       | однокан. до 1280×800, мультиплекс с MIPI-DSI |
-| RGB888     | до 1280×800                                  | :contentReference[oaicite:7]{index=7}
+| RGB888     | до 1280×800                                  | 
 
 ### Камеры и аудио
 
 - **Камеры**:  
-  – 1× DVP<br>– 1× 4-полосный MIPI-CSI :contentReference[oaicite:8]{index=8}  
+  – 1× DVP<br>– 1× 4-полосный MIPI-CSI 
 - **Аудио**:  
-  – 1× 8-кан. I2S/TDM<br>– 2× 2-кан. I2S<br>– 1× 8-кан. PDM :contentReference[oaicite:9]{index=9}
+  – 1× 8-кан. I2S/TDM<br>– 2× 2-кан. I2S<br>– 1× 8-кан. PDM 
 
 ### Сеть и USB
 
-- **Ethernet**: 2× 1 Gbps GMAC (RGMII/RMII) :contentReference[oaicite:10]{index=10}  
+- **Ethernet**: 2× 1 Gbps GMAC (RGMII/RMII) 
 - **USB 3.0**: 2 порта (1× Host, 1× OTG)  
-- **USB 2.0**: 2× Host + 1× OTG (демультиплексируется с USB 3.0) :contentReference[oaicite:11]{index=11}  
+- **USB 2.0**: 2× Host + 1× OTG (демультиплексируется с USB 3.0) 
 - **CAN-FD**: 3 порта  
-- **UART**: 10 × до 4 Мбит/с :contentReference[oaicite:12]{index=12}  
+- **UART**: 10 × до 4 Мбит/с 
 
 ### Хранение и расширения
 
-- **SDIO 3.0**: 2× до 104 МБ/с :contentReference[oaicite:13]{index=13}  
+- **SDIO 3.0**: 2× до 104 МБ/с   
 - **SATA 3.0**: 2× 6 Гбит/с (eSATA)  
 - **PCIe 2.1**: 1× x1, 5 Гбит/с  
-- **PCIe 3.0**: 2× (2×1 или 1×2 линии) по 8 Гбит/с каждая :contentReference[oaicite:14]{index=14}  
+- **PCIe 3.0**: 2× (2×1 или 1×2 линии) по 8 Гбит/с каждая 
 - **SerDes**: 3 пары  
-- **SPI / I²C / PWM**: 4× SPI, 5× I²C, 16× PWM :contentReference[oaicite:15]{index=15}  
+- **SPI / I²C / PWM**: 4× SPI, 5× I²C, 16× PWM 
 
 ---
 
 ## Графика и видеокодеки
 
-- **OpenGL ES** 1.1 / 2.0 / 3.2; **Vulkan** 1.0 / 1.1; **OpenCL** 2.0 :contentReference[oaicite:16]{index=16}  
+- **OpenGL ES** 1.1 / 2.0 / 3.2; **Vulkan** 1.0 / 1.1; **OpenCL** 2.0 
 - **Видео-декодер**: H.264 / H.265 / VP9 до 4096×2304 @ 60 fps  
-- **Видео-энкодер**: H.264 / H.265 до 1920×1080 @ 60 fps :contentReference[oaicite:17]{index=17}
+- **Видео-энкодер**: H.264 / H.265 до 1920×1080 @ 60 fps 
 
 ---
 
 ## Питание и рабочие условия
 
-- **Вход питания**: DC 5 V :contentReference[oaicite:18]{index=18}  
+- **Вход питания**: DC 5 V 
 - **Температурный диапазон**:  
   – Коммерческий: 0 … +70 °C  
-  – Индустриальный: –40 … +85 °C :contentReference[oaicite:19]{index=19}  
-- **Габаритный коннектор**: 4×80 pins, шаг 0.5 мм (BTB) :contentReference[oaicite:20]{index=20}
+  – Индустриальный: –40 … +85 °C  
+- **Габаритный коннектор**: 4×80 pins, шаг 0.5 мм (BTB) 
 
 ---
 
 ## Программная поддержка и утилиты
 
-- **ОС**: Linux 4.19, Android 11, Debian, Ubuntu 20.04 :contentReference[oaicite:21]{index=21}  
+- **ОС**: Linux 4.19, Android 11, Debian, Ubuntu 20.04 
 - **Утилиты**:  
   – SD-карта для прошивки  
-  – USB OTG для прошивки и отладки :contentReference[oaicite:22]{index=22}  
-
+  – USB OTG для прошивки и отладки 
 ---
 
 ## Варианты заказа
@@ -120,7 +117,7 @@ PBkit301-A – это система-на-модуле (SoM) на базе Rockc
 | PBkit301-A COREB_v1.0 | TMC3568CBV1G      | RK3568B2   | 2.0 ГГц | 2 GB LPDDR4 | 16 GB | 0 … +70      |
 | PBkit301-A COREB_v1.0 | TMC3568CB1G1      | RK3568B2   | 2.0 ГГц | 4 GB LPDDR4 | 16 GB | 0 … +70      |
 | PBkit301-A COREB_v1.0 | TMC3568CBV1X      | RK3568J    | 1.8 ГГц | 2 GB LPDDR4 | 16 GB | –40 … +85    |
-| PBkit301-A COREB_v1.0 | TMC3568CB1X1      | RK3568J    | 1.8 ГГц | 4 GB LPDDR4 | 16 GB | –40 … +85    | :contentReference[oaicite:23]{index=23}
+| PBkit301-A COREB_v1.0 | TMC3568CB1X1      | RK3568J    | 1.8 ГГц | 4 GB LPDDR4 | 16 GB | –40 … +85    | 
 
 ---
 
