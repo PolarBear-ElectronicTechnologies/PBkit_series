@@ -127,6 +127,6 @@ PBkit301-A – это система-на-модуле (SoM) на базе Rockc
 - **Инструменты**: SDcard writer, USB OTG tool, отладочные демо  
 
 > Все технические файлы Вы можете найти на нашем сайте: https://pb-embedded.ru/?ysclid=mb0xwcpmmj97014171
-Также мы есть в Telegram: @PBPOLAR
+> Также мы есть в Telegram: [@PBPOLAR]
 
 
