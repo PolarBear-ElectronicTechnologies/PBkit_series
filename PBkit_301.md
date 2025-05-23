@@ -1,4 +1,8 @@
-# PBkit301-A 
+# PBkit301-A and PBkit301-A-BASE
+
+![PBkit301-A](PBkit301-A )
+
+![PBkit301-A](images/pbkit_3-1_A_BASE.jpg )
 
 ## Содержание
 
@@ -127,6 +131,7 @@ PBkit301-A – это система-на-модуле (SoM) на базе Rockc
 - **Инструменты**: SDcard writer, USB OTG tool, отладочные демо  
 
 > Все технические файлы Вы можете найти на нашем сайте: https://pb-embedded.ru/?ysclid=mb0xwcpmmj97014171
+> 
 > Также мы есть в Telegram: [Скорее напишите нам](https://t.me/PBPOLAR)
 
 
