@@ -1,6 +1,6 @@
 # PBkit 401 (A and A-BASE) Hardware Development Guide
 
-!(pbkit401-A-BASE)[images/10001.png]
+[images/10001.png]
 
 ---
 
