@@ -142,7 +142,7 @@ finally:
     line.set_value(0)
     line.release()
 ```
-## 2. Слхранение и установка
+## 2. Сохранение и установка
 ```bash
 chmod +x blink.py # сохраняем код в файл
 sudo ./blink.py # запускаем файл в исполнение
