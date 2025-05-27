@@ -1,4 +1,4 @@
-# A40I Hardware Development Guide
+# PBkit 401 (A and A-BASE) Hardware Development Guide
 
 
 ---
