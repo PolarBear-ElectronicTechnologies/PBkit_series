@@ -1,175 +1,183 @@
-# PBKit501-A — Одноплатный модуль (Allwinner T507-H)
+# PBKit501-A: Одноплатный модуль на базе Allwinner T507-H
 
 ![PBKit501-A](https://pb-embedded.ru/upload/iblock/4b4/4b4be4a324d8b8f9c4c3f47e75d9e04a.png)
 
-**PBKit501-A** — это компактный отладочный комплект на базе мощного четырёхъядерного процессора **Allwinner T507-H**. Модуль состоит из вспомогательной «базовой» платы (PBKit501-A_​BASE), на которой закреплён сам вычислительный блок (PBKit501-A), объединённый с необходимыми интерфейсами и компонентами для быстрой разработки «из коробки».
-
-- Полный модуль (PBKit501-A) можно встраивать в готовое устройство.
-- PBKit501-A_​BASE (оценочный комплект) поставляется со всем необходимым (USB-TTL, кабели, адаптер, антенна, батарея и пр.), чтобы сразу начать разработку и тестирование.
+**PBKit501-A** — это компактный отладочный модуль (SOM) от PB-Embedded, построенный вокруг мощного четырехъядерного процессора **Allwinner T507-H**. В сочетании с базовой платой **PBKit501-A_BASE** он предоставляет полный набор интерфейсов, необходимых для быстрого старта в проектах IoT, мультимедиа, embedded Linux и машинного обучения.
 
 ---
 
-## Основные характеристики
+## Содержание статьи
 
-| Параметр                         | Значение                                                         |
-|----------------------------------|------------------------------------------------------------------|
-| **Процессор (SoC)**              | Allwinner T507-H, 4×Cortex-A53 до 1.8 ГГц                         |
-| **ОЗУ**                           | 2 GB LPDDR4                                                      |
-| **Постоянная память (eMMC)**      | 16 GB eMMC (встроенная), поддержка TF-карты                      |
-| **ОС (по умолчанию)**             | Linux 4.9 (Ubuntu 18.04), в разработке Android 10                 |
-| **Питание**                       | 5 V DC (через разъём питания)                                     |
-| **Габариты модуля**               | 60 × 40 × 4 мм                                                     |
-| **Температурный диапазон**        | –40 °C…+85 °C (промышл. уровень), 0 °C…+70 °C (коммерческий)       |
-| **Интерфейсы отображения**        |  
-| • LVDS ×1 (двухканальный, до 1080p) / 24 бит RGB (мультиплексируется) |  
-| • HDMI ×1 (HDCP 1.4/2.2, до 4K)                                 |
-| **Сетевые интерфейсы**            |  
-| • Ethernet 100 Мбит/с (RMII на основной плате)  
-• Ethernet 1 Гбит/с (RGMII на базе встроенной карты)               |
-| **UART**                         | 6 портов (UART0 – отладочный, остальные – мультиплексируются)      |
-| **USB**                          | 4 портa 2.0 (USB OTG ×1, USB Host ×3)                              |
-| **SDIO**                         | 2 слота (4-битный режим данных)                                    |
-| **I²C**                          | До 5 партнерских шин (часы/данные мультиплексируются)             |
-| **I²S / Audio**                  | I²S ×1, линейный выход ×1                                          |
-| **ADC**                          |  
-| • LRADC (6 бит) ×1 (детекция клавиш)  
-• GPADC (8 бит, 1.8 V) ×4                                             |
-| **PWM**                          | До 6 каналов (мультиплексируется с другими сигнальными линиями)   |
-| **RTC**                          | Встроенный контроллер часов реального времени                     |
-| **CVBS**                         | CVBS выход ×1                                                     |
-| **Камера**                       | Параллельный CSI ×1, MIPI CSI ×1                                   |
-| **CIR (ИК-приёмник)**            | 1 линия                                                            |
-| **Драйверы и поддержка (Linux 4.9)** | LPDDR4, eMMC, GPIO, UART, I²C, SDIO, Ethernet (CMAC + EMAC), USB 2.0, KEY, ADC, LINEOUT, Wi-Fi, RTC, HDMI OUT, Touch, двойной LVDS, RGB 24 бит, 4G (модем) |
+1. [Краткое описание](#краткое-описание)  
+2. [Технические характеристики](#технические-характеристики)  
+3. [Аппаратная платформа](#аппаратная-платформа)  
+4. [Комплектация набора PBKit501-A_BASE](#комплектация-набора-pbkit501-a_base)  
+5. [Схема питания](#схема-питания-и-разводка)  
+6. [Пример Python-скрипта на GPIO](#пример-python-скрипта-на-gpio)  
+7. [Заключение](#заключение)  
 
 ---
 
-## Комплектация оценочного набора PBKit501-A_BASE
+## Краткое описание
 
-Оценочный комплект включает в себя:
+PBKit501-A — это System-on-Module (SoM) для встраиваемых приложений, основанный на Allwinner T507-H (4×Cortex-A53 до 1.8 ГГц). Модуль имеет встроенные **2 GB LPDDR4**, **16 GB eMMC** и полный набор интерфейсов:
 
-1. **Модуль PBKit501-A_BASE** (с установленным модулем PBKit501-A)  
-2. **Антенна Wi-Fi / Bluetooth** (mini-PCB)  
-3. **Сетевой кабель Ethernet** (1.5 м, прямой)  
-4. **UART-кабель PH2.0** (для соединения с UART-портом модуля)  
-5. **USB↔UART-конвертер** (USB-TTL адаптер)  
-6. **Блок питания 12 V / 1 A** (сетевой адаптер)  
-7. **Набор перемычек / джамперов** (для конфигурации)  
-8. **Батарея CR2032 + держатель** (для питания RTC)  
-9. **USB-кабель Micro-USB** (для питания платы и загрузки ПО)
+- Ethernet (100 Мбит+1 Гбит),  
+- HDMI 4K,  
+- LVDS 1080p,  
+- USB 2.0 ×4 (OTG ×1, Host ×3),  
+- I²C ×5, SPI ×2, UART ×6,  
+- I²S, Audio LINEOUT, ADC ×4, PWM ×6,  
+- CSI (MIPI + параллельный), CVBS, CIR, RTC, GPIOs.  
 
----
-
-#!/usr/bin/env bash
-#
-# test_sysinfo.sh
-# Скрипт выводит основные сведения о системе PBKit501-A
-#
-
-echo "----------------------------------------"
-echo "  PBKit501-A System Information Test"
-echo "----------------------------------------"
-echo
-
-# CPU: модель и частоты
-echo "CPU Information:"
-if [ -f /proc/cpuinfo ]; then
-    awk -F ': ' '/model name/ {print "  Model:", $2; exit}' /proc/cpuinfo
-    awk -F ': ' '/cpu MHz/ {print "  Current CPU MHz:", $2; exit}' /proc/cpuinfo
-else
-    echo "  /proc/cpuinfo not found!"
-fi
-echo
-
-# Memory: общая и свободная
-echo "Memory Information:"
-if command -v free &> /dev/null; then
-    free -h | awk 'NR==1{print "  "$0} NR==2{print "  "$0}'
-else
-    echo "  Команда free не найдена!"
-fi
-echo
-
-# Disk: корневой раздел
-echo "Disk Usage (/):"
-if command -v df &> /dev/null; then
-    df -h / | awk 'NR==1{print "  "$0} NR==2{print "  "$0}'
-else
-    echo "  Команда df не найдена!"
-fi
-echo
-
-# Temperature: CPU temp (если доступно)
-echo "Temperature (CPU):"
-if [ -f /sys/class/thermal/thermal_zone0/temp ]; then
-    rawtemp=$(cat /sys/class/thermal/thermal_zone0/temp)
-    cputemp=$(echo "scale=1; $rawtemp/1000" | bc)
-    echo "  $cputemp °C"
-else
-    echo "  Температура не доступна (no thermal_zone0)!"
-fi
-echo
-
-# Uptime
-echo "Uptime:"
-if command -v uptime &> /dev/null; then
-    uptime | awk '{print "  "$0}'
-else
-    echo "  Команда uptime не найдена!"
-fi
-echo
-
-echo "----------------------------------------"
-echo "      Test Completed."
-echo "----------------------------------------"
+Благодаря базовой плате **PBKit501-A_BASE** вы получаете готовую к отладке платформу с USB-UART, Ethernet, слотом microSD, разъёмом питания и разъёмами для дисплея и камер.
 
 ---
 
-#!/usr/bin/env python3
+## Технические характеристики
+
+| Параметр                        | PBKit501-A (SoM)                                   |
+|---------------------------------|----------------------------------------------------|
+| **SoC**                         | Allwinner T507-H (4×Cortex-A53 @1.8 ГГц, NPU)       |
+| **ОЗУ (LPDDR4)**                | 2 GB                                               |
+| **ПЗУ (eMMC)**                  | 16 GB (передустановленный образ Linux)             |
+| **MicroSD**                     | 1 слот SD 4-битный                                  |
+| **Wi-Fi / Bluetooth**           | 802.11 ac + Bluetooth 5.0 LE                       |
+| **Ethernet**                    | 100 Мбит (RMII) + 1 Гбит (RGMII)                   |
+| **USB**                         | OTG 2.0 ×1, Host 2.0 ×3                            |
+| **HDMI**                        | HDMI 1.4/2.0 до 4K 30 fps                           |
+| **LVDS / RGB24 бит**            | 1×LVDS 2-канальный (1080p) или RGB 24 бит          |
+| **Audio**                       | I²S ×1, LINEOUT ×1                                 |
+| **CSI (камера)**                | 1×MIPI CSI, 1×Parallel CSI                         |
+| **CVBS (композит)**             | 1 линия                                           |
+| **I²C / SPI / UART**            | I²C ×5, SPI ×2, UART ×6                            |
+| **ADC / PWM**                   | ADC 6-бит ×1 (LRADC), ADC 8-бит ×4 (GPADC), PWM ×6  |
+| **RTC**                         | Встроенный с батарейным питанием (CR2032)           |
+| **Температурный диапазон**      | –40…+85 °C (промышленный) / 0…+70 °C (коммерческий)  |
+| **Питание**                     | 5 V DC (через разъем Jack), LDO 3.3 V для SoC       |
+| **Габариты SoM**                | 60 × 40 × 4 мм                                      |
+| **Габариты базовой платы**      | 100 × 80 × 12 мм                                    |
+
+---
+
+## Аппаратная платформа
+
+### 1. SoC Allwinner T507-H
+
+- 4 × ARM Cortex-A53 @ 1.8 ГГц (64-бит), поддерживает NEON/FPV4.  
+- Встроенный NPU (Neural Processing Unit) для TinyML, до 0.5 TOPS.  
+- Контроллер памяти LPDDR4, шина 32 бит, до 4 Гбит.  
+- Интерфейсы eMMC 5.1, SDIO, SPI, I²C, I²S, PWM, GPIO, ADC, DRAM.
+
+### 2. Память
+
+- **2 GB LPDDR4** — оперативная память высокого быстродействия.  
+- **16 GB eMMC** — встроенный флеш-накопитель, на котором предустановлен Linux (Ubuntu 18.04).  
+- **MicroSD слот** — поддерживает UHS-I, до 256 GB. Используется для загрузки/расширения.
+
+### 3. Интерфейсы
+
+- **Ethernet 100 Мбит/1 Гбит** — два PHY, один на RMII (100 Мбит) и один на RGMII (1 Гбит).  
+- **HDMI 1.4/2.0** — видео-выход до 4K 30 fps, поддержка HDCP 1.4/2.2.  
+- **LVDS 24 бит** — два канала, до 1080p, либо RGB 24 бит.  
+- **USB 2.0** — один порт OTG, три порта Host (через USB hub).  
+- **I²S ×1**, **LINEOUT ×1** — цифровой аудио-интерфейс и аналоговый выход.  
+- **CSI** — один MIPI CSI, один параллельный CSI для камер *.  
+- **CVBS **— композитный видео-выход (1 линия).  
+- **UART ×6** — один отладочный (UART0 → USB-TTL), остальные мультиплексируются.  
+- **I²C ×5** — пять шин I²C, могут быть использованы для датчиков, RTC, расширителей портов.  
+- **SPI ×2**, **GPIO ×34** — универсальные цифровые линии.  
+- **ADC** — LRADC (6 бит) для клавиш/датчиков, GPADC (8 бит, 1.8 V) ×4 для внешних аналогов.  
+- **PWM ×6** — ШИМ-выходы для подсветки, моторов, сервоприводов.  
+- **RTC** — встроенный контроллер часов, питание от батареи CR2032.  
+- **CIR** — ИК-приёмник для дистанционного управления.  
+
+---
+
+## Комплектация набора PBKit501-A_BASE
+
+1. **SoM PBKit501-A** (Allwinner T507-H + RAM + eMMC)  
+2. **Базовая плата PBKit501-A_BASE**:
+   - USB-UART (CP2102 или CH9102F) для консоли.  
+   - 5 V DC Jack (разъем) и LDO → 3.3 V.  
+   - Ethernet RJ45 (100 Мбит/1 Гбит).  
+   - HDMI Type A Выход.  
+   - LVDS/RGB коннектор (40-pin LVDS/RGB).  
+   - CSI коннектор (15-pin MIPI Camera).  
+   - MicroSD socket (4-bit, UHS-I).  
+   - Кнопки BOOT (GPIO 0), RESET (EN).  
+   - RTC Battery Holder (CR2032).  
+   - Разъемы «по категориям»: GPIO (2×20-pin 2.54 mm), I²C, SPI, PCM, ADC.  
+   - Антенна Wi-Fi/BLE (u.FL + mini PCB).  
+   - Набор джамперов для выбора режима загрузки, отображения LVDS/RGB, питания и др.
+
+3. **Кабели и аксессуары**:
+   - **USB A → Micro-USB** (питание и загрузка).  
+   - **USB-TTL Serial Cable** (PH2.0 к CP2102/CH9102F).  
+   - **Ethernet Cat5e Cable** (1.5 m).  
+   - **Антенна Wi-Fi/BLE** (2 dBi, mini-PCB).  
+   - **Блок питания 12 V 1 A** (разъем 5.5/2.1 mm).  
+   - **Пара джамперов** (штырьки для разного режима BOOT, LVDS/RGB).  
+   - **Инструкция + даташиты** (набор PDF).
+
+---
+
+## Схема питания 
+    RTC CR2032 Battery  → VBAT (1.8 V RTC regulator)  
+    USB-A → Micro-USB (5 V) → USB-UART → CP2102/CH9102F → UART0 на SoM  
+    Ethernet RJ45 ↔ PHY (PHY1 100 Mbit, PHY2 1 Gbit) → GMAC на SoM  
+    HDMI Type A → HDMI TX на SoM  
+    LVDS 40-pin → LVDS/RGB MUX на SoM  
+    Cameras 15-pin CSI → MIPI/CSI на SoM  
+---
+## Работа с GPIO
+    #!/usr/bin/env python3
 """
-blink_gpio.py — простой пример мигания GPIO на PBKit501-A (Allwinner T507-H).
-Настройка: на GPIO 13 подключён светодиод катодом на землю.
+blink_gpio.py — мигание LED на GPIO12 (Allwinner T507-H, PBKit501-A)
+Требует root-доступ.
 """
 
 import time
 import os
 
-GPIO_PIN = "13"  # Номер GPIO (в sysfs это «gpio13»)
+*Задайте номер GPIO (на Allwinner это gpioX, где X = номер).*
 
+GPIO_PIN = "12"
 GPIO_PATH = f"/sys/class/gpio/gpio{GPIO_PIN}"
 EXPORT_PATH = "/sys/class/gpio/export"
 UNEXPORT_PATH = "/sys/class/gpio/unexport"
 
 def gpio_export(pin):
-    if not os.path.isdir(GPIO_PATH):
+    if not os.path.exists(GPIO_PATH):
         with open(EXPORT_PATH, "w") as f:
             f.write(pin)
-        time.sleep(0.1)  # дождаться создания файлов
+        time.sleep(0.1)
 
 def gpio_unexport(pin):
-    if os.path.isdir(GPIO_PATH):
+    if os.path.exists(GPIO_PATH):
         with open(UNEXPORT_PATH, "w") as f:
             f.write(pin)
         time.sleep(0.1)
 
 def gpio_set_direction(pin, direction):
-    dir_path = f"{GPIO_PATH}/direction"
-    with open(dir_path, "w") as f:
+    dir_file = f"{GPIO_PATH}/direction"
+    with open(dir_file, "w") as f:
         f.write(direction)
     time.sleep(0.01)
 
 def gpio_set_value(pin, value):
-    val_path = f"{GPIO_PATH}/value"
-    with open(val_path, "w") as f:
+    val_file = f"{GPIO_PATH}/value"
+    with open(val_file, "w") as f:
         f.write(value)
 
 def main():
-    print(f"Export GPIO {GPIO_PIN}...")
+    print(f"Экспортируем GPIO {GPIO_PIN}...")
     gpio_export(GPIO_PIN)
 
-    print("Set direction to 'out'")
+    print("Устанавливаем направление 'out'...")
     gpio_set_direction(GPIO_PIN, "out")
 
-    print("Blinking LED on GPIO", GPIO_PIN)
+    print("Мигаем LED (GPIO {})... (Ctrl+C для остановки)".format(GPIO_PIN))
     try:
         while True:
             gpio_set_value(GPIO_PIN, "1")
@@ -177,34 +185,23 @@ def main():
             gpio_set_value(GPIO_PIN, "0")
             time.sleep(0.5)
     except KeyboardInterrupt:
-        print("\nStopping blink. Cleaning up...")
+        print("\nОстановка. Освобождаем GPIO...")
     finally:
         gpio_unexport(GPIO_PIN)
-        print("GPIO unexported. Exiting.")
+        print("GPIO снят. Завершаем.")
 
 if __name__ == "__main__":
     main()
-
->PBKit501-A на базе Allwinner T507-H — это:
-
+---
+## Заключение 
+** PBKit501-A на базе Allwinner T507-H — это:**
 Высокопроизводительный MPU-модуль (4 × A53 @1.8 ГГц),
-
 2 GB LPDDR4 + 16 GB eMMC,
-
 Богатый набор интерфейсов (LVDS/RGB, HDMI, Ethernet, UART, USB, I²C, SPI, I²S, SDIO, Audio, Camera, CVBS, CIR, RTC, ADC, PWM),
-
-Оценочный комплект с USB‐UART адаптером, кабелями и антеннами.
-
-Ниже краткие шаги, чтобы начать:
-
-Подайте 5 В на разъём питания базовой платы.
-
-Подключите USB-UART к консоли или HDMI/дисплей.
-
-Зайдите по UART в терминал (115200 baud) и залогиньтесь (обычно root@pbkit501:~#).
-
-Запустите test_sysinfo.sh (см. выше), чтобы убедиться, что ОС загружена и всё «здорово».
-
 При желании подключите LED к GPIO и запустите Python-скрипт blink_gpio.py для простого теста вывода.
-
 Для полной документации (распиновка, User Manual, схемы) — зайдите в раздел поддержки на официальном сайте PB-Embedded (пароль к Яндекс-диску: PBPARTY).
+
+> **Примечание:** Все рекомендации относятся к разводке PCB и выбору компонентов для обеспечения надёжности, EMC-совместимости и простоты отладки. Следуйте этим правилам, чтобы минимизировать проблемы при производстве и эксплуатации платы A50I.
+> > Все технические файлы Вы можете найти на нашем сайте: https://pb-embedded.ru/?ysclid=mb0xwcpmmj97014171
+> Также мы есть в Telegram: [Скорее напишите нам](https://t.me/PBPOLAR)
+
