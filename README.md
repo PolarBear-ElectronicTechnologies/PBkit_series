@@ -59,15 +59,152 @@
 
 ---
 
-## Разводка и главные компоненты
+#!/usr/bin/env bash
+#
+# test_sysinfo.sh
+# Скрипт выводит основные сведения о системе PBKit501-A
+#
 
-```text
-   ┌─────────────────────────┐         ┌────────────────────────┐
-   │  PBKit501-A_BASE Board  │  UART   │  USB↔UART-Adapter      │
-   │                         │〈────────〉┃ CP2102 или CH9102F  │
-   │  +  PBKit501-A Module   │         └────────────────────────┘
-   │  +  Wi-Fi Antenna (mini)│
-   │  +  Ethernet-PHY (1 Gb)  │         ┌────────────────────────┐
-   │  +  12 V ⟶ 5 V Regulator  │〈─5 V───〉┃ 12 V / 1 A PSU        │
-   │  +  RTC Battery (CR2032) │         └────────────────────────┘
-   └─────────────────────────┘
+echo "----------------------------------------"
+echo "  PBKit501-A System Information Test"
+echo "----------------------------------------"
+echo
+
+# CPU: модель и частоты
+echo "CPU Information:"
+if [ -f /proc/cpuinfo ]; then
+    awk -F ': ' '/model name/ {print "  Model:", $2; exit}' /proc/cpuinfo
+    awk -F ': ' '/cpu MHz/ {print "  Current CPU MHz:", $2; exit}' /proc/cpuinfo
+else
+    echo "  /proc/cpuinfo not found!"
+fi
+echo
+
+# Memory: общая и свободная
+echo "Memory Information:"
+if command -v free &> /dev/null; then
+    free -h | awk 'NR==1{print "  "$0} NR==2{print "  "$0}'
+else
+    echo "  Команда free не найдена!"
+fi
+echo
+
+# Disk: корневой раздел
+echo "Disk Usage (/):"
+if command -v df &> /dev/null; then
+    df -h / | awk 'NR==1{print "  "$0} NR==2{print "  "$0}'
+else
+    echo "  Команда df не найдена!"
+fi
+echo
+
+# Temperature: CPU temp (если доступно)
+echo "Temperature (CPU):"
+if [ -f /sys/class/thermal/thermal_zone0/temp ]; then
+    rawtemp=$(cat /sys/class/thermal/thermal_zone0/temp)
+    cputemp=$(echo "scale=1; $rawtemp/1000" | bc)
+    echo "  $cputemp °C"
+else
+    echo "  Температура не доступна (no thermal_zone0)!"
+fi
+echo
+
+# Uptime
+echo "Uptime:"
+if command -v uptime &> /dev/null; then
+    uptime | awk '{print "  "$0}'
+else
+    echo "  Команда uptime не найдена!"
+fi
+echo
+
+echo "----------------------------------------"
+echo "      Test Completed."
+echo "----------------------------------------"
+
+---
+
+#!/usr/bin/env python3
+"""
+blink_gpio.py — простой пример мигания GPIO на PBKit501-A (Allwinner T507-H).
+Настройка: на GPIO 13 подключён светодиод катодом на землю.
+"""
+
+import time
+import os
+
+GPIO_PIN = "13"  # Номер GPIO (в sysfs это «gpio13»)
+
+GPIO_PATH = f"/sys/class/gpio/gpio{GPIO_PIN}"
+EXPORT_PATH = "/sys/class/gpio/export"
+UNEXPORT_PATH = "/sys/class/gpio/unexport"
+
+def gpio_export(pin):
+    if not os.path.isdir(GPIO_PATH):
+        with open(EXPORT_PATH, "w") as f:
+            f.write(pin)
+        time.sleep(0.1)  # дождаться создания файлов
+
+def gpio_unexport(pin):
+    if os.path.isdir(GPIO_PATH):
+        with open(UNEXPORT_PATH, "w") as f:
+            f.write(pin)
+        time.sleep(0.1)
+
+def gpio_set_direction(pin, direction):
+    dir_path = f"{GPIO_PATH}/direction"
+    with open(dir_path, "w") as f:
+        f.write(direction)
+    time.sleep(0.01)
+
+def gpio_set_value(pin, value):
+    val_path = f"{GPIO_PATH}/value"
+    with open(val_path, "w") as f:
+        f.write(value)
+
+def main():
+    print(f"Export GPIO {GPIO_PIN}...")
+    gpio_export(GPIO_PIN)
+
+    print("Set direction to 'out'")
+    gpio_set_direction(GPIO_PIN, "out")
+
+    print("Blinking LED on GPIO", GPIO_PIN)
+    try:
+        while True:
+            gpio_set_value(GPIO_PIN, "1")
+            time.sleep(0.5)
+            gpio_set_value(GPIO_PIN, "0")
+            time.sleep(0.5)
+    except KeyboardInterrupt:
+        print("\nStopping blink. Cleaning up...")
+    finally:
+        gpio_unexport(GPIO_PIN)
+        print("GPIO unexported. Exiting.")
+
+if __name__ == "__main__":
+    main()
+
+>PBKit501-A на базе Allwinner T507-H — это:
+
+Высокопроизводительный MPU-модуль (4 × A53 @1.8 ГГц),
+
+2 GB LPDDR4 + 16 GB eMMC,
+
+Богатый набор интерфейсов (LVDS/RGB, HDMI, Ethernet, UART, USB, I²C, SPI, I²S, SDIO, Audio, Camera, CVBS, CIR, RTC, ADC, PWM),
+
+Оценочный комплект с USB‐UART адаптером, кабелями и антеннами.
+
+Ниже краткие шаги, чтобы начать:
+
+Подайте 5 В на разъём питания базовой платы.
+
+Подключите USB-UART к консоли или HDMI/дисплей.
+
+Зайдите по UART в терминал (115200 baud) и залогиньтесь (обычно root@pbkit501:~#).
+
+Запустите test_sysinfo.sh (см. выше), чтобы убедиться, что ОС загружена и всё «здорово».
+
+При желании подключите LED к GPIO и запустите Python-скрипт blink_gpio.py для простого теста вывода.
+
+Для полной документации (распиновка, User Manual, схемы) — зайдите в раздел поддержки на официальном сайте PB-Embedded (пароль к Яндекс-диску: PBPARTY).
