@@ -192,8 +192,9 @@ def main():
         gpio_unexport(GPIO_PIN)
         print("GPIO снят. Завершаем.")
 ``` 
+![](images/t2.png)
 
-
+![](images/test3.png)
 
 ---
 # Заключение 
