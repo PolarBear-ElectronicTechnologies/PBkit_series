@@ -135,7 +135,6 @@ PBKit501-A — это System-on-Module (SoM) для встраиваемых п�
 """
 blink_gpio.py — мигание LED на GPIO12 (Allwinner T507-H, PBKit501-A)
 Требует root-доступ.
-"""
 
 import time
 import os
@@ -189,9 +188,9 @@ def main():
     finally:
         gpio_unexport(GPIO_PIN)
         print("GPIO снят. Завершаем.")
-
 if __name__ == "__main__":
     main()
+ """   
 ---
 ## Заключение 
 ** PBKit501-A на базе Allwinner T507-H — это:**
