@@ -193,8 +193,8 @@ def main():
 
 
 ---
-## Заключение 
-# PBKit501-A на базе Allwinner T507-H — это:
+# Заключение 
+#№PBKit501-A на базе Allwinner T507-H — это:
 Высокопроизводительный MPU-модуль (4 × A53 @1.8 ГГц),
 2 GB LPDDR4 + 16 GB eMMC,
 Богатый набор интерфейсов (LVDS/RGB, HDMI, Ethernet, UART, USB, I²C, SPI, I²S, SDIO, Audio, Camera, CVBS, CIR, RTC, ADC, PWM),
